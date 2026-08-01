@@ -1,0 +1,6 @@
+﻿Rozpoczęto kompilację o 13:58...
+1>------ Kompilacja rozpoczęta: Projekt: ConsoleApplication1, Konfiguracja: Debug x64 ------
+1>  ConsoleApplication1.c
+1>  ConsoleApplication1.vcxproj -> C:\Users\Miłosz\source\repos\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
+========== Kompilacja: sukces — 1, niepowodzenie — 0, aktualne — 0, pominięto — 0 ==========
+========== Kompilacja – ukończono o 13:58. Czas trwania: 00,470 s ==========
