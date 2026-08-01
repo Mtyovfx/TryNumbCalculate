@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Konto {
+	char imie[30];
+	int numer_id;
+	int pin;
+	float saldo;
+};
+
+int main()
+{
+
+	struct Konto klienci[3] = {
+			{"Milosz", 1, 3456, 1000.50},
+			{"Slawomir",   2, 2345, 500.50},
+			{"Beata",  3, 1234, 750.50}
+	};
+
+
+
+	int aktywne_konto = -1;
+	int wpisany_pin;
+	printf("-----SYMULATOR BANKOMATU------\n");
+
+	do
+	{
+		printf("Prosze podac PIN: ");
+		scanf_s("%d", &wpisany_pin);
+
+		for (int i = 0; i < 3; i++)
+		{
+			if (wpisany_pin == klienci[i].pin)
+			{
+				aktywne_konto = i;
+				break;
+			}
+		}
+		if (aktywne_konto == -1)
+		{
+			printf("Bledny PIN, Sprobuj ponownie.\n\n");
+		}
+
+	} while (aktywne_konto == -1);
+
+	printf("\nZalogowano pomyslnie! Witaj kliencie ID: %s\n", klienci[aktywne_konto].imie);
+
+
+	int wybor;
+	float wplata;
+	float wyplata;
+	do
+	{
+		printf("--- MENU GLOWNE ---\n");
+		printf("1. Sprawdz stan konta\n");
+		printf("2. Wplac gotowke\n");
+		printf("3. Wyplac gotowke\n");
+		printf("4. Wyjdz\n");
+		printf("Wybierz operacje (1-4): ");
+
+		scanf_s("%d", &wybor);
+
+		if (wybor == 1)
+		{
+			printf("\nTwoje aktualne saldo wynosi: %.2f PLN\n", klienci[aktywne_konto].saldo);
+		}
+		else if (wybor == 2)
+		{
+			printf("\nJaka kwote chcesz wplacic?\n");
+			scanf_s("%f", &wplata);
+			if (wplata < 0)
+			{
+				printf("NIe mozna wplacic ujemnej wartosci\n");
+			}
+			else
+			{
+				klienci[aktywne_konto].saldo += wplata;
+				printf("Saldo wynosi %.2f zl\n", klienci[aktywne_konto].saldo);
+			}
+
+		}
+		else if (wybor == 3)
+		{
+			printf("\nJaka kwote chcesz wyplacic?\n");
+			scanf_s("%f", &wyplata);
+			if (wyplata > klienci[aktywne_konto].saldo)
+			{
+				printf("Za malo srodkow na koncie\n");
+			}
+			else
+			{
+				klienci[aktywne_konto].saldo = klienci[aktywne_konto].saldo - wyplata;
+				printf("Pieniadze zostaly wyplacone!\n");
+				printf("Na koncie jest teraz %f zl\n", klienci[aktywne_konto].saldo);
+			}
+		}
+		else if (wybor == 4)
+		{
+			printf("\nDziekujemy za skorzystanie z naszych uslug. Do widzenia!\n");
+		}
+		else
+		{
+			printf("Nieznana operacja!\n");
+		}
+
+	} while (wybor != 4);
+
+	return 0;
+
+}
